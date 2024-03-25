@@ -14,7 +14,9 @@ hi
 ***Our Data give water quality metrics such as pH, Salinity, and Dissolved Oxygen for various sites (Bay, A, B, C, D) and across many years (1899, 1989-2019).***
 
 ```{r cars}
-summary(cars)
+library(readr)
+BKB_WaterQualityData_2020084_1_ <- read_csv("BKB_WaterQualityData_2020084 (1).csv")
+View(BKB_WaterQualityData_2020084_1_)
 ```
 
 ## Including Plots
