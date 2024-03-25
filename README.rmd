@@ -1,6 +1,6 @@
 ---
 title: "README.rmd"
-authors: "Alexa Elliott, Olivia Riniker, Conner Boysen"
+authors: "Alexa Elliott, Olivia Riniker, Connor Boysen"
 date: "2024-03-25"
 output: html_document
 ---
