@@ -9,18 +9,33 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Water Quality Data
-hi
-***Our Data give water quality metrics such as pH, Salinity, and Dissolved Oxygen for various sites (Bay, A, B, C, D) and across many years (1899, 1989-2019).***
+# Analysis on Water Quality Data
+###Alexa Elliot, Olivia Riniker, Connor Boysen
 
-```{r cars}
+##Introduction
+This data set can asses the social and economic impacts that Covid-19 had on people in America. Using the frequency of symptoms of anxiety and depression over a seven day period. 
+
+1. What is the prevalence of anxiety and depression symptoms among different demographic groups in the United States during the COVID-19 pandemic?
+
+2. How have indicators of anxiety and depression changed over time during the survey period?
+
+3. Are there disparities in reported anxiety and depression symptoms based on factors such as age, gender, race/ethnicity, education level, or geographic location?
+
+4. What are the potential implications of the findings for public health interventions and mental wellness support during and after the pandemic?
+
+5. If a lock down were to ever happen again in what ways can we better address the emotional states of american citizens based on facts and statistics. 
+
+```{r}
 library(readr)
-BKB_WaterQualityData_2020084_1_ <- read_csv("BKB_WaterQualityData_2020084 (1).csv")
-View(BKB_WaterQualityData_2020084_1_)
+anxiety_depression <- read_csv("Indicators_of_Anxiety_or_Depression_Based_on_Reported_Frequency_of_Symptoms_During_Last_7_Days.csv")
+View(anxiety_depression)
+
 ```
 
-## Including Plots
+## cleaning data
+```{r}
 
+```
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
