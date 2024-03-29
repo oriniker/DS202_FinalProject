@@ -47,8 +47,15 @@ View(anxiety_depression)
 next we will start cleaning the data, starting with selecting the variables that we will be exploring in this data.
 
 ```{r}
-# separating the data set by indicator 
+# deleting unneeded columns
+library(tidyverse)
+col_delete <- c("Time Period Label", "Confidence Interval", "Quartile Range")
 
+anxiety_depression <- anxiety_depression %>% 
+  select(-one_of(col_delete))
+
+
+#seperating the data by indicator
 # Filter data for depressive disorder
 depressive_data <- anxiety_depression %>%
   filter(Indicator == "Symptoms of Depressive Disorder")
