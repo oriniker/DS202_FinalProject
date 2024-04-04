@@ -112,4 +112,44 @@ ggplot(data = by_ages, aes(x = Subgroup, y = Value)) +
 
 The bar plot illustrates the prevalence of anxiety and depression symptoms among various age groups in the United States during the COVID-19 pandemic. As depicted, there is a noticeable trend indicating that younger age groups tend to exhibit a higher prevalence of these symptoms compared to older age groups. Specifically, individuals in the 18-29 years age range demonstrate the highest prevalence, followed by those in the 30-39 years age bracket, and so forth. This suggests that younger adults are more susceptible to experiencing symptoms of anxiety and depressive disorders during the pandemic. Such findings may reflect the unique challenges faced by younger demographics, including disruptions to education, employment, and social interactions, all of which have been significantly impacted by the pandemic. These insights underscore the importance of targeted mental health interventions and support systems, particularly for younger populations, to mitigate the adverse psychological effects of the COVID-19 crisis.
 
+```{r}
+library(tidyverse)
+#Depressive_anxiety_data
+by_sex <- depressive_anxiety_data %>%  
+  filter(Group == "By Sex")
+
+ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Sex",
+       x = "Sex",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+#Depressive data
+by_sex <- depressive_data %>%  
+  filter(Group == "By Sex")
+
+ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Depression Symptoms Among Sex",
+       x = "Sex",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+#Anxiety data
+by_sex <- anxiety_data %>%  
+  filter(Group == "By Sex")
+
+ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety Symptoms Among Sex",
+       x = "Sex",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
 
