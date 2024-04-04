@@ -154,3 +154,21 @@ ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
 
 
 Question #2: How does the severity of anxiety and depression change across time w.r.t Education?
+
+```{r}
+library(dplyr)
+
+# Filter the dataset to include only entries where Group is "By Education"
+anxiety_data_education <- anxiety_data %>% 
+  filter(Group == "By Education")
+
+library(ggplot2)
+
+# Plotting the line chart
+ggplot(anxiety_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
+  geom_line() +
+  labs(x = "Time Period", y = "Value") +
+  ggtitle("Anxiety Levels by Education Level") +
+  scale_color_manual(values = c("blue", "red", "green", "orange")) # Customizing line colors
+```
+
