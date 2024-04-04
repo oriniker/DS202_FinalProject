@@ -19,7 +19,7 @@ This data set can asses the social and economic impacts that Covid-19 had on peo
 
 1.  What is the prevalence of anxiety and depression symptoms among different age groups in the United States during the COVID-19 pandemic?
 
-2.  How have indicators of anxiety and depression changed over time during the survey period?
+2.  How does the severity of anxiety and depression change across time w.r.t Education?
 
 3.  Are there disparities in reported anxiety and depression symptoms based on factors such as age, gender, race/ethnicity, education level, or geographic location?
 
@@ -153,3 +153,4 @@ ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
 ```
 
 
+Question #2: How does the severity of anxiety and depression change across time w.r.t Education?
