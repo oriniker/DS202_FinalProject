@@ -71,4 +71,19 @@ depressive_anxiety_data <- anxiety_depression %>%
 ```
 
 ##Variables 
+- Indicator
+- Group
+- State
+- Subgroup
+- Phase
+- Time Period
+- Time Period Label
+- Time Period Start Date
+- Time Period End Date
+- Value
+- Low Cl
+- High Cl
+- Confidence Interval
+- Quartile Range
+
 
