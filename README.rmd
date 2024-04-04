@@ -143,7 +143,7 @@ by_sex <- anxiety_data %>%
   filter(Group == "By Sex")
 
 ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
-  geom_bar(stat = "identity", position = "dodge") + 
+  geom_bar(stat = "identity", position = "dodge") +  
   labs(title = "Prevalence of Anxiety Symptoms Among Sex",
        x = "Sex",
        y = "Prevalence (%)") +
