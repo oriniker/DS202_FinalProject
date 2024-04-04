@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This data set can asses the social and economic impacts that Covid-19 had on people in America. Using the frequency of symptoms of anxiety and depression over a seven day period.To asses these different variables we will explore these questions:
 
-1.  What is the prevalence of anxiety and depression symptoms among different demographic groups in the United States during the COVID-19 pandemic?
+1.  What is the prevalence of anxiety and depression symptoms among different age groups in the United States during the COVID-19 pandemic?
 
 2.  How have indicators of anxiety and depression changed over time during the survey period?
 
@@ -95,27 +95,21 @@ depressive_anxiety_data <- anxiety_depression %>%
 
 ```{r}
 # Load the required library
-library(ggplot2)
+library(tidyverse)
 
-# Create a data frame with the provided data
-data <- data.frame(
-  Demographic_Group = c('18-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80+', 
-                        'Male', 'Female', 'Hispanic/Latino', 'Non-Hispanic White', 
-                        'Non-Hispanic Black', 'Non-Hispanic Asian', 'Other/Multiple Races', 
-                        'Less than HS', 'HS diploma/GED', 'Some college/Associate', 
-                        "Bachelor's or higher"),
-  Prevalence_Percentage = c(32.7, 25.7, 24.8, 23.2, 18.4, 13.6, 14.4, 20.8, 26.1, 
-                            29.4, 21.4, 25.6, 23.6, 28.3, 32.7, 25.4, 25.6, 17.6)
-)
+by_ages <- depressive_anxiety_data %>%  
+  filter(Group == "By Age")
 
-# Create the bar plot
-ggplot(data, aes(x = Demographic_Group, y = Prevalence_Percentage)) +
-  geom_bar(stat = "identity", fill = "skyblue") +
-  labs(title = "Prevalence of Anxiety and Depression Symptoms by Demographic Groups",
-       x = "Demographic Groups",
-       y = "Prevalence Percentage") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  coord_flip()  # Rotate x-axis labels for better readability
+
+ggplot(data = by_ages, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different Age Groups",
+       x = "Age Groups",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+
+The bar plot illustrates the prevalence of anxiety and depression symptoms among various age groups in the United States during the COVID-19 pandemic. As depicted, there is a noticeable trend indicating that younger age groups tend to exhibit a higher prevalence of these symptoms compared to older age groups. Specifically, individuals in the 18-29 years age range demonstrate the highest prevalence, followed by those in the 30-39 years age bracket, and so forth. This suggests that younger adults are more susceptible to experiencing symptoms of anxiety and depressive disorders during the pandemic. Such findings may reflect the unique challenges faced by younger demographics, including disruptions to education, employment, and social interactions, all of which have been significantly impacted by the pandemic. These insights underscore the importance of targeted mental health interventions and support systems, particularly for younger populations, to mitigate the adverse psychological effects of the COVID-19 crisis.
 
 
