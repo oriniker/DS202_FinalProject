@@ -19,7 +19,7 @@ This data set can asses the social and economic impacts that Covid-19 had on peo
 
 1.  What is the prevalence of anxiety and depression symptoms among different age groups in the United States during the COVID-19 pandemic?
 
-2.  How have indicators of anxiety and depression changed over time during the survey period?
+2.  How does the severity of anxiety and depression change across time w.r.t Education?
 
 3.  Are there disparities in reported anxiety and depression symptoms based on factors such as age, gender, race/ethnicity, education level, or geographic location?
 
@@ -113,3 +113,4 @@ ggplot(data = by_ages, aes(x = Subgroup, y = Value)) +
 The bar plot illustrates the prevalence of anxiety and depression symptoms among various age groups in the United States during the COVID-19 pandemic. As depicted, there is a noticeable trend indicating that younger age groups tend to exhibit a higher prevalence of these symptoms compared to older age groups. Specifically, individuals in the 18-29 years age range demonstrate the highest prevalence, followed by those in the 30-39 years age bracket, and so forth. This suggests that younger adults are more susceptible to experiencing symptoms of anxiety and depressive disorders during the pandemic. Such findings may reflect the unique challenges faced by younger demographics, including disruptions to education, employment, and social interactions, all of which have been significantly impacted by the pandemic. These insights underscore the importance of targeted mental health interventions and support systems, particularly for younger populations, to mitigate the adverse psychological effects of the COVID-19 crisis.
 
 
+Question #2: How does the severity of anxiety and depression change across time w.r.t Education?
