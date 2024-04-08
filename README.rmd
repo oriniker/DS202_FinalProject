@@ -168,7 +168,29 @@ library(ggplot2)
 ggplot(anxiety_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
   geom_line() +
   labs(x = "Time Period", y = "Value") +
-  ggtitle("Anxiety Levels by Education Level") +
+  ggtitle("Anxiety Levels by Education Level Over Time") +
   scale_color_manual(values = c("blue", "red", "green", "orange")) # Customizing line colors
+
+depressive_data_education <- depressive_data %>% 
+  filter(Group == "By Education")
+
+# Plotting the line chart
+ggplot(depressive_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
+  geom_line() +
+  labs(x = "Time Period", y = "Value") +
+  ggtitle("Depression Levels by Education Level Over Time") +
+  scale_color_manual(values = c("blue", "red", "green", "orange"))
+
+
+depressive_anxiety_data_education <- depressive_anxiety_data %>% 
+  filter(Group == "By Education")
+
+# Plotting the line chart
+ggplot(depressive_anxiety_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
+  geom_line() +
+  labs(x = "Time Period", y = "Value") +
+  ggtitle("Depression and Anxiety Levels by Education Level Over Time") +
+  scale_color_manual(values = c("blue", "red", "green", "orange"))
+
 ```
 
