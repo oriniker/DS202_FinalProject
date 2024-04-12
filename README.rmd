@@ -193,4 +193,10 @@ ggplot(depressive_anxiety_data_education, aes(x = `Time Period`, y = Value, colo
   scale_color_manual(values = c("blue", "red", "green", "orange"))
 
 ```
+The graph depicts the prevalence of symptoms of anxiety and depressive disorders among different educational attainment groups in the United States during the COVID-19 pandemic. The data is represented by four distinct lines, each corresponding to individuals with different levels of education: less than a high school diploma, high school diploma or GED, some college or associate's degree, and bachelor's degree or higher. Notably, the group with less than a high school diploma consistently exhibits the highest prevalence of symptoms, followed by the some college or associate's degree group, the high school diploma or GED group, and finally, the bachelor's degree or higher group, which consistently reports the lowest prevalence.
 
+Across all three graphs representing depression and anxiety, depression alone, and the confidence intervals, there is a consistent trend: the bachelor's degree or higher group shows a significantly lower prevalence compared to the other educational groups. Interestingly, the high school diploma and some college or associate's degree groups display very similar trends and often overlap, particularly in the depression graph.
+
+A striking uptick in symptom prevalence is evident across all graphs around time period 20, which began in late November 2020. This could potentially be attributed to the resumption of school attendance during the pandemic and the occurrence of the first major holiday season amidst COVID-19. Subsequently, there is a notable decline in symptom prevalence until around time period 32, which marks the beginning of June 2021, when another upward trend emerges.
+
+Overall, the graph underscores the disparities in the prevalence of anxiety and depressive symptoms across different educational groups during the COVID-19 pandemic, highlighting the heightened vulnerability of individuals with lower educational attainment levels and the impact of significant events and changes in daily routines on mental well-being.
