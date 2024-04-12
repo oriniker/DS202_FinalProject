@@ -1,15 +1,4 @@
 # DS202_FinalProject
----
-title: "Depression and Anxiety Rates related to Covid-19"
-team members: "Alexa Elliott, Olivia Riniker, Connor Boysen"
-date: "2024-03-25"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Depression and Anxiety rates related to Covid-19
 
 ### Alexa Elliot, Olivia Riniker, Connor Boysen
@@ -94,6 +83,8 @@ depressive_anxiety_data <- anxiety_depression %>%
 
 - High Cl: The upper bound of the confidence interval for the reported value.
 
+
+### Question 1: What is the prevalence of anxiety and depression symptoms among different age groups in the United States during the COVID-19 pandemic?
 ```{r}
 # Load the required library
 library(tidyverse)
@@ -118,7 +109,7 @@ The bar plot illustrates the prevalence of anxiety and depression symptoms among
 
 
 
-*Question #2: How does the severity of anxiety and depression change across time w.r.t Education?*
+### Question #2: How does the severity of anxiety and depression change across time w.r.t Education?*
 
 ```{r}
 library(dplyr)
@@ -279,7 +270,7 @@ The line chart illustrates the variation in anxiety levels among different racia
 Observations from the graph indicate that anxiety levels fluctuated over time across all racial and ethnic groups. There is a notable increase in anxiety levels around time period 20, which corresponds to late November 2020, possibly due to the start of the holiday season and increased academic pressures for students. Subsequently, there is a gradual decline in anxiety levels until around time period 32, marking the beginning of June 2021, followed by another increase. Among the racial and ethnic groups, "Non-Hispanic Asian, single race" consistently shows the lowest anxiety levels, while "Hispanic or Latino" and "Non-Hispanic, other races and multiple races" tend to have higher anxiety levels throughout the observed period.
 
 
-*QUestions 4: How does the prevalence of anxiety and depressive symptoms vary across different states in the United States during the COVID-19 pandemic?*
+### Questions 4: How does the prevalence of anxiety and depressive symptoms vary across different states in the United States during the COVID-19 pandemic?*
 ```{r}
 #anxiety and depression based on location 
 by_state <- depressive_anxiety_data %>%  
@@ -326,7 +317,7 @@ ggplot(data = by_state, aes(x = Subgroup, y = Value)) +
 ```
 These graphs illustrate the prevalence of anxiety and depression symptoms across different states in the United States during the COVID-19 pandemic. Mississippi prominently stands out with the highest reported prevalence, exceeding 50%. Additionally, the District of Columbia, Louisiana, New Mexico, Oregon, and West Virginia also reported prevalence rates around 50%. In contrast, states like North Dakota, Nebraska, Maryland, and Delaware consistently demonstrated lower prevalence rates, particularly in the anxiety graph where Mississippi reported notably higher prevalence compared to other states.
 
-
+### Questions 5: Are there any specific time periods that show significant increases or decreases in symptom prevalence?
 ```{r}
 by_time_period <- anxiety_depression %>%
   filter(Group == "By Age") %>%
@@ -344,7 +335,7 @@ ggplot(data = by_time_period, aes(x = `Time Period`, y = Avg_Prevalence)) +
 The line graph titled "Average Prevalence of Anxiety and Depression Symptoms Over Time" depicts the average prevalence of anxiety and depressive symptoms across various time periods during the COVID-19 pandemic in the United States. The x-axis represents the different time periods, while the y-axis indicates the average prevalence of symptoms in percentage. The blue line shows the trend of symptom prevalence over time. The graph reveals fluctuations in symptom prevalence, with some time periods showing significant increases or decreases. This visualization highlights the evolving mental health landscape throughout the pandemic, providing insights into the overall trend and helping to identify critical periods of heightened symptoms.
 
 
-##Conclusion: 
+## Conclusion: 
 Our analysis highlights significant disparities in depression and anxiety rates related to COVID-19. Younger individuals, particularly those aged 18-29, showed the highest prevalence of symptoms, reflecting the unique challenges they face, including disruptions to education and social interactions. This underscores the need for targeted mental health interventions for younger populations.
 
 Disparities were also evident across educational levels, with those having less than a high school diploma consistently reporting the highest symptom prevalence. Additionally, fluctuations in symptom prevalence around specific time periods, such as an uptick in late November 2020 and a decline until June 2021, emphasize the impact of significant events on mental well-being.
