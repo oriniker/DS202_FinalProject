@@ -1,1 +1,352 @@
 # DS202_FinalProject
+---
+title: "Depression and Anxiety Rates related to Covid-19"
+team members: "Alexa Elliott, Olivia Riniker, Connor Boysen"
+date: "2024-03-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Depression and Anxiety rates related to Covid-19
+
+### Alexa Elliot, Olivia Riniker, Connor Boysen
+
+## Introduction
+
+This data set can asses the social and economic impacts that Covid-19 had on people in America. Using the frequency of symptoms of anxiety and depression over a seven day period.To asses these different variables we will explore these questions:
+
+1.  What is the prevalence of anxiety and depression symptoms among different age groups in the United States during the COVID-19 pandemic?
+
+2.  How does the severity of anxiety and depression change across time w.r.t Education?
+
+3.  Are there disparities in reported anxiety and depression symptoms based on factors such as age, gender, race/ethnicity,or education level?
+
+4.  How does the prevalence of anxiety and depressive symptoms vary across different states in the United States during the COVID-19 pandemic?
+
+5.  Are there any specific time periods that show significant increases or decreases in symptom prevalence? 
+
+## Data Structure
+
+the link for our data set is <https://data.cdc.gov/api/views/8pt5-q6wp/rows.csv?accessType=DOWNLOAD> . We obtained this data set from data.gov, it is a data set from the the U.S. Department of Health & Human Services which they obtained through an internet questionnaire.This data covers from April of 2020 to march or 2024 so we will be able to see the affects of the lock down as well as the change produced after the knockdown was disbanded.We are not include confidence interval(because we already have the seperate high and low), the quartile range(this column is missing many values), and time period label(because we have specific start and end dates.)
+
+**pick variables to exclude that won't be helpful**
+
+## cleaning data
+
+First we load in the csv file for this data set.
+
+```{r}
+library(readr)
+anxiety_depression <- read_csv("Indicators_of_Anxiety_or_Depression_Based_on_Reported_Frequency_of_Symptoms_During_Last_7_Days.csv")
+View(anxiety_depression)
+
+```
+
+next we will start cleaning the data, starting with selecting the variables that we will be exploring in this data.
+
+```{r}
+# deleting unneeded columns
+library(tidyverse)
+col_delete <- c("Time Period Label", "Confidence Interval", "Quartile Range")
+
+anxiety_depression <- anxiety_depression %>% 
+  select(-one_of(col_delete))
+
+
+#seperating the data by indicator
+# Filter data for depressive disorder
+depressive_data <- anxiety_depression %>%
+  filter(Indicator == "Symptoms of Depressive Disorder")
+
+# Filter data for anxiety disorder
+anxiety_data <- anxiety_depression %>%
+  filter(Indicator == "Symptoms of Anxiety Disorder")
+
+# Filter data for depressive and anxiety disorder
+depressive_anxiety_data <- anxiety_depression %>%
+  filter(Indicator == "Symptoms of Anxiety Disorder or Depressive Disorder")
+
+```
+
+##Variables 
+- Indicator: indicates the type of mental health condition being measures (e.g. symptoms of depressing disorder, anxiety disorder, or both)
+
+- Group: Describes the sub grouping or category of the data (e.g., National Estimate, By Age, By Sex, By Race/Hispanic ethnicity, By Education, By State).
+
+- State: Specifies the state or region within the United States for which the data is collected.
+
+- Subgroup: Further specifies the subgroup within the specified group (e.g., age range, sex, race/ethnicity, education level, state).
+
+- Phase: Represents the phase or wave of data collection (e.g., Phase 1, Phase 2).
+
+- Time Period: Numeric representation of the time period during which the data was collected.
+
+- Time Period Start Date: The start date of the time period.
+
+- Time Period End Date: The end date of the time period.
+
+- Value: The reported value or percentage representing the frequency of symptoms of the specified mental health condition.
+
+- Low Cl: The lower bound of the confidence interval for the reported value.
+
+- High Cl: The upper bound of the confidence interval for the reported value.
+
+```{r}
+# Load the required library
+library(tidyverse)
+
+by_ages <- depressive_anxiety_data %>%  
+  filter(Group == "By Age")
+
+
+ggplot(data = by_ages, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different Age Groups",
+       x = "Age Groups",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+The bar plot illustrates the prevalence of anxiety and depression symptoms among various age groups in the United States during the COVID-19 pandemic. As depicted, there is a noticeable trend indicating that younger age groups tend to exhibit a higher prevalence of these symptoms compared to older age groups. Specifically, individuals in the 18-29 years age range demonstrate the highest prevalence, followed by those in the 30-39 years age bracket, and so forth. This suggests that younger adults are more susceptible to experiencing symptoms of anxiety and depressive disorders during the pandemic. Such findings may reflect the unique challenges faced by younger demographics, including disruptions to education, employment, and social interactions, all of which have been significantly impacted by the pandemic. These insights underscore the importance of targeted mental health interventions and support systems, particularly for younger populations, to mitigate the adverse psychological effects of the COVID-19 crisis.
+
+
+
+
+
+
+*Question #2: How does the severity of anxiety and depression change across time w.r.t Education?*
+
+```{r}
+library(dplyr)
+
+# Filter the dataset to include only entries where Group is "By Education"
+anxiety_data_education <- anxiety_data %>% 
+  filter(Group == "By Education")
+
+library(ggplot2)
+
+# Plotting the line chart
+ggplot(anxiety_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
+  geom_line() +
+  labs(x = "Time Period", y = "Value") +
+  ggtitle("Anxiety Levels by Education Level Over Time") +
+  scale_color_manual(values = c("blue", "red", "green", "orange")) # Customizing line colors
+
+depressive_data_education <- depressive_data %>% 
+  filter(Group == "By Education")
+
+# Plotting the line chart
+ggplot(depressive_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
+  geom_line() +
+  labs(x = "Time Period", y = "Value") +
+  ggtitle("Depression Levels by Education Level Over Time") +
+  scale_color_manual(values = c("blue", "red", "green", "orange"))
+
+
+depressive_anxiety_data_education <- depressive_anxiety_data %>% 
+  filter(Group == "By Education")
+
+# Plotting the line chart
+ggplot(depressive_anxiety_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
+  geom_line() +
+  labs(x = "Time Period", y = "Value") +
+  ggtitle("Depression and Anxiety Levels by Education Level Over Time") +
+  scale_color_manual(values = c("blue", "red", "green", "orange"))
+
+```
+The graph depicts the prevalence of symptoms of anxiety and depressive disorders among different educational attainment groups in the United States during the COVID-19 pandemic. The data is represented by four distinct lines, each corresponding to individuals with different levels of education: less than a high school diploma, high school diploma or GED, some college or associate's degree, and bachelor's degree or higher. Notably, the group with less than a high school diploma consistently exhibits the highest prevalence of symptoms, followed by the some college or associate's degree group, the high school diploma or GED group, and finally, the bachelor's degree or higher group, which consistently reports the lowest prevalence.
+
+Across all three graphs representing depression and anxiety, depression alone, and the confidence intervals, there is a consistent trend: the bachelor's degree or higher group shows a significantly lower prevalence compared to the other educational groups. Interestingly, the high school diploma and some college or associate's degree groups display very similar trends and often overlap, particularly in the depression graph.
+
+A striking uptick in symptom prevalence is evident across all graphs around time period 20, which began in late November 2020. This could potentially be attributed to the resumption of school attendance during the pandemic and the occurrence of the first major holiday season amidst COVID-19. Subsequently, there is a notable decline in symptom prevalence until around time period 32, which marks the beginning of June 2021, when another upward trend emerges.
+
+Overall, the graph underscores the disparities in the prevalence of anxiety and depressive symptoms across different educational groups during the COVID-19 pandemic, highlighting the heightened vulnerability of individuals with lower educational attainment levels and the impact of significant events and changes in daily routines on mental well-being.
+
+**Question 3: Are there disparities in reported anxiety and depression symptoms based on factors such as age, gender, race/ethnicity, education level?**
+```{r}
+library(tidyverse)
+#Depressive_anxiety_data
+by_sex <- depressive_anxiety_data %>%  
+  filter(Group == "By Sex")
+
+ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Sex",
+       x = "Sex",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+#Depressive data
+by_sex <- depressive_data %>%  
+  filter(Group == "By Sex")
+
+ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Depression Symptoms Among Sex",
+       x = "Sex",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+#Anxiety data
+by_sex <- anxiety_data %>%   
+  filter(Group == "By Sex")
+
+ggplot(data = by_sex, aes(x = Subgroup, y = Value, fill = "pink")) +
+  geom_bar(stat = "identity", position = "dodge") +  
+  labs(title = "Prevalence of Anxiety Symptoms Among Sex",
+       x = "Sex",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+Prevalence of Anxiety and Depression Symptoms Among Sex:
+The graph illustrates the prevalence of anxiety and depression symptoms across different sexes in the United States during the COVID-19 pandemic. Females consistently reported a higher prevalence of symptoms compared to males. Specifically, women averaged above 40% prevalence, while men averaged just above 30%. This highlights a notable gender disparity in the reported prevalence of anxiety and depression symptoms.
+
+Prevalence of Depression Symptoms Among Sex:
+This graph focuses exclusively on the prevalence of depression symptoms across different sexes in the United States during the COVID-19 pandemic. Similar to the combined anxiety and depression data, females exhibited a higher prevalence of depression symptoms than males. The prevalence among women was consistently higher, emphasizing the gender-specific differences in reported depression symptoms.Though with this graph there is a low prevalence in relation to the other graphs where average prevalence for females capped at a little over 30% with males just slightly lower under 30%. whereas in the other graphs we are seeing caps being over 40%.  
+
+Prevalence of Anxiety Symptoms Among Sex:
+The graph displays the prevalence of anxiety symptoms across different sexes in the United States during the COVID-19 pandemic. As observed in the depression and anxiety combined data, females reported a higher prevalence of anxiety symptoms than males. The gap between genders was particularly pronounced, with women averaging above 40% prevalence and men averaging just above 30%.
+
+
+
+
+
+```{r}
+by_race <- depressive_anxiety_data %>%  
+  filter(Group == "By Race/Hispanic ethnicity")
+
+ggplot(data = by_race, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms among different races",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+
+
+
+by_race <- anxiety_data %>%  
+  filter(Group == "By Race/Hispanic ethnicity")
+
+ggplot(data = by_race, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different Races",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+
+
+
+by_race <- depressive_data %>%  
+  filter(Group == "By Race/Hispanic ethnicity")
+
+ggplot(data = by_race, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different Races",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+```
+
+These graphs depict the average prevalence of anxiety and depression symptoms among different racial and ethnic groups in the United States during the COVID-19 pandemic. Notably, there is minimal variation in prevalence rates across the different racial and ethnic categories. The "Other races" group consistently reports the highest prevalence, followed by the "Non-Hispanic Black, single race," "Hispanic or Latino," "Non-Hispanic Asian, single race," and finally the "Non-Hispanic White, single race" groups. This trend could reflect underlying socio-economic trends, culture, and access-to-care differences among these different groups. 
+
+
+```{r}
+anxiety_data_education <- anxiety_data %>% 
+  filter(Group == "By Race/Hispanic ethnicity")
+
+library(ggplot2)
+
+# Plotting the line chart
+ggplot(anxiety_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
+  geom_line() +
+  labs(x = "Time Period", y = "Value") +
+  ggtitle("Anxiety Levels by Race/Hispanci ethnicity Over Time") +
+  scale_color_manual(values = c("blue", "red", "green", "orange", "pink"))
+```
+The line chart illustrates the variation in anxiety levels among different racial and Hispanic ethnicity groups over time during the COVID-19 pandemic. The x-axis represents the time periods, while the y-axis indicates the prevalence of anxiety symptoms. The chart displays data for five racial and ethnic groups: "Hispanic or Latino" in blue, "Non-Hispanic White, single race" in red, "Non-Hispanic Black, single race" in green, "Non-Hispanic Asian, single race" in orange, and "Non-Hispanic, other races and multiple races" in pink.
+
+Observations from the graph indicate that anxiety levels fluctuated over time across all racial and ethnic groups. There is a notable increase in anxiety levels around time period 20, which corresponds to late November 2020, possibly due to the start of the holiday season and increased academic pressures for students. Subsequently, there is a gradual decline in anxiety levels until around time period 32, marking the beginning of June 2021, followed by another increase. Among the racial and ethnic groups, "Non-Hispanic Asian, single race" consistently shows the lowest anxiety levels, while "Hispanic or Latino" and "Non-Hispanic, other races and multiple races" tend to have higher anxiety levels throughout the observed period.
+
+
+*QUestions 4: How does the prevalence of anxiety and depressive symptoms vary across different states in the United States during the COVID-19 pandemic?*
+```{r}
+#anxiety and depression based on location 
+by_state <- depressive_anxiety_data %>%  
+  filter(Group == "By State")
+
+ggplot(data = by_state, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8))
+
+
+#Anxiety based on location
+by_state <- anxiety_data %>%  
+  filter(Group == "By State")
+
+ggplot(data = by_state, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8))
+
+
+#Depression based on location
+by_state <- depressive_data %>%  
+  filter(Group == "By State")
+
+ggplot(data = by_state, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of  Depression Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8))
+
+
+
+
+
+```
+These graphs illustrate the prevalence of anxiety and depression symptoms across different states in the United States during the COVID-19 pandemic. Mississippi prominently stands out with the highest reported prevalence, exceeding 50%. Additionally, the District of Columbia, Louisiana, New Mexico, Oregon, and West Virginia also reported prevalence rates around 50%. In contrast, states like North Dakota, Nebraska, Maryland, and Delaware consistently demonstrated lower prevalence rates, particularly in the anxiety graph where Mississippi reported notably higher prevalence compared to other states.
+
+
+```{r}
+by_time_period <- anxiety_depression %>%
+  filter(Group == "By Age") %>%
+  group_by(`Time Period`) %>%
+  summarise(Avg_Prevalence = mean(Value), .groups = 'drop')
+
+# Create the line plot
+ggplot(data = by_time_period, aes(x = `Time Period`, y = Avg_Prevalence)) +
+  geom_line(color = "blue") +
+  labs(title = "Average Prevalence of Anxiety and Depression Symptoms Over Time",
+       x = "Time Period",
+       y = "Average Prevalence (%)") +
+  theme_minimal()
+```
+The line graph titled "Average Prevalence of Anxiety and Depression Symptoms Over Time" depicts the average prevalence of anxiety and depressive symptoms across various time periods during the COVID-19 pandemic in the United States. The x-axis represents the different time periods, while the y-axis indicates the average prevalence of symptoms in percentage. The blue line shows the trend of symptom prevalence over time. The graph reveals fluctuations in symptom prevalence, with some time periods showing significant increases or decreases. This visualization highlights the evolving mental health landscape throughout the pandemic, providing insights into the overall trend and helping to identify critical periods of heightened symptoms.
+
+
+##Conclusion: 
+Our analysis highlights significant disparities in depression and anxiety rates related to COVID-19. Younger individuals, particularly those aged 18-29, showed the highest prevalence of symptoms, reflecting the unique challenges they face, including disruptions to education and social interactions. This underscores the need for targeted mental health interventions for younger populations.
+
+Disparities were also evident across educational levels, with those having less than a high school diploma consistently reporting the highest symptom prevalence. Additionally, fluctuations in symptom prevalence around specific time periods, such as an uptick in late November 2020 and a decline until June 2021, emphasize the impact of significant events on mental well-being.
+
+Gender and racial disparities were notable, with females consistently reporting higher prevalence rates than males, and variations across racial and ethnic groups suggesting underlying socio-economic and cultural factors. Regional differences were also significant, with states like Mississippi and the District of Columbia reporting higher rates than others. These findings highlight the need for region-specific and targeted mental health interventions and support systems during the pandemic.
