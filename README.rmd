@@ -201,7 +201,101 @@ A striking uptick in symptom prevalence is evident across all graphs around time
 
 Overall, the graph underscores the disparities in the prevalence of anxiety and depressive symptoms across different educational groups during the COVID-19 pandemic, highlighting the heightened vulnerability of individuals with lower educational attainment levels and the impact of significant events and changes in daily routines on mental well-being.
 
+```{r}
+#anxiety and depression based on location 
+by_state <- depressive_anxiety_data %>%  
+  filter(Group == "By State")
+
+ggplot(data = by_state, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+
+
+#Anxiety based on location
+by_state <- anxiety_data %>%  
+  filter(Group == "By State")
+
+ggplot(data = by_state, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+
+
+#Depression based on location
+by_state <- depressive_data %>%  
+  filter(Group == "By State")
+
+ggplot(data = by_state, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
 
 
 
+
+
+```
+
+```{r}
+by_race <- depressive_anxiety_data %>%  
+  filter(Group == "By Race/Hispanic ethnicity")
+
+ggplot(data = by_race, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+
+
+
+by_race <- anxiety_data %>%  
+  filter(Group == "By Race/Hispanic ethnicity")
+
+ggplot(data = by_race, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+
+
+
+by_race <- depressive_data %>%  
+  filter(Group == "By Race/Hispanic ethnicity")
+
+ggplot(data = by_race, aes(x = Subgroup, y = Value)) +
+  geom_bar(stat = "identity", position = "dodge") + 
+  labs(title = "Prevalence of Anxiety and Depression Symptoms Among Different States",
+       x = "Location",
+       y = "Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+```
+
+```{r}
+anxiety_data_education <- anxiety_data %>% 
+  filter(Group == "By Race/Hispanic ethnicity")
+
+library(ggplot2)
+
+# Plotting the line chart
+ggplot(anxiety_data_education, aes(x = `Time Period`, y = Value, color = Subgroup)) +
+  geom_line() +
+  labs(x = "Time Period", y = "Value") +
+  ggtitle("Anxiety Levels by Race/Hispanci ethnicity Over Time") +
+  scale_color_manual(values = c("blue", "red", "green", "orange", "pink"))
+```
 
