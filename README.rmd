@@ -25,7 +25,7 @@ This data set can asses the social and economic impacts that Covid-19 had on peo
 
 4.  How does the prevalence of anxiety and depressive symptoms vary across different states in the United States during the COVID-19 pandemic?
 
-5.  If a lock down were to ever happen again in what ways can we better address the emotional states of american citizens based on facts and statistics.
+5.  Are there any specific time periods that show significant increases or decreases in symptom prevalence? 
 
 ## Data Structure
 
@@ -73,7 +73,7 @@ depressive_anxiety_data <- anxiety_depression %>%
 ##Variables 
 - Indicator: indicates the type of mental health condition being measures (e.g. symptoms of depressing disorder, anxiety disorder, or both)
 
-- Group: Describes the subgrouping or category of the data (e.g., National Estimate, By Age, By Sex, By Race/Hispanic ethnicity, By Education, By State).
+- Group: Describes the sub grouping or category of the data (e.g., National Estimate, By Age, By Sex, By Race/Hispanic ethnicity, By Education, By State).
 
 - State: Specifies the state or region within the United States for which the data is collected.
 
@@ -326,5 +326,26 @@ ggplot(data = by_state, aes(x = Subgroup, y = Value)) +
 These graphs illustrate the prevalence of anxiety and depression symptoms across different states in the United States during the COVID-19 pandemic. Mississippi prominently stands out with the highest reported prevalence, exceeding 50%. Additionally, the District of Columbia, Louisiana, New Mexico, Oregon, and West Virginia also reported prevalence rates around 50%. In contrast, states like North Dakota, Nebraska, Maryland, and Delaware consistently demonstrated lower prevalence rates, particularly in the anxiety graph where Mississippi reported notably higher prevalence compared to other states.
 
 
+```{r}
+by_time_period <- anxiety_depression %>%
+  filter(Group == "By Age") %>%
+  group_by(`Time Period`) %>%
+  summarise(Avg_Prevalence = mean(Value), .groups = 'drop')
+
+# Create the line plot
+ggplot(data = by_time_period, aes(x = `Time Period`, y = Avg_Prevalence)) +
+  geom_line(color = "blue") +
+  labs(title = "Average Prevalence of Anxiety and Depression Symptoms Over Time",
+       x = "Time Period",
+       y = "Average Prevalence (%)") +
+  theme_minimal()
+```
+The line graph titled "Average Prevalence of Anxiety and Depression Symptoms Over Time" depicts the average prevalence of anxiety and depressive symptoms across various time periods during the COVID-19 pandemic in the United States. The x-axis represents the different time periods, while the y-axis indicates the average prevalence of symptoms in percentage. The blue line shows the trend of symptom prevalence over time. The graph reveals fluctuations in symptom prevalence, with some time periods showing significant increases or decreases. This visualization highlights the evolving mental health landscape throughout the pandemic, providing insights into the overall trend and helping to identify critical periods of heightened symptoms.
 
 
+##Conclusion: 
+Our analysis highlights significant disparities in depression and anxiety rates related to COVID-19. Younger individuals, particularly those aged 18-29, showed the highest prevalence of symptoms, reflecting the unique challenges they face, including disruptions to education and social interactions. This underscores the need for targeted mental health interventions for younger populations.
+
+Disparities were also evident across educational levels, with those having less than a high school diploma consistently reporting the highest symptom prevalence. Additionally, fluctuations in symptom prevalence around specific time periods, such as an uptick in late November 2020 and a decline until June 2021, emphasize the impact of significant events on mental well-being.
+
+Gender and racial disparities were notable, with females consistently reporting higher prevalence rates than males, and variations across racial and ethnic groups suggesting underlying socio-economic and cultural factors. Regional differences were also significant, with states like Mississippi and the District of Columbia reporting higher rates than others. These findings highlight the need for region-specific and targeted mental health interventions and support systems during the pandemic.
