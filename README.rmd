@@ -23,7 +23,7 @@ This data set can asses the social and economic impacts that Covid-19 had on peo
 
 3.  Are there disparities in reported anxiety and depression symptoms based on factors such as age, gender, race/ethnicity, education level, or geographic location?
 
-4.  What are the potential implications of the findings for public health interventions and mental wellness support during and after the pandemic?
+4.  How does the prevalence of anxiety and depressive symptoms vary across different states in the United States during the COVID-19 pandemic?
 
 5.  If a lock down were to ever happen again in what ways can we better address the emotional states of american citizens based on facts and statistics.
 
@@ -200,3 +200,8 @@ Across all three graphs representing depression and anxiety, depression alone, a
 A striking uptick in symptom prevalence is evident across all graphs around time period 20, which began in late November 2020. This could potentially be attributed to the resumption of school attendance during the pandemic and the occurrence of the first major holiday season amidst COVID-19. Subsequently, there is a notable decline in symptom prevalence until around time period 32, which marks the beginning of June 2021, when another upward trend emerges.
 
 Overall, the graph underscores the disparities in the prevalence of anxiety and depressive symptoms across different educational groups during the COVID-19 pandemic, highlighting the heightened vulnerability of individuals with lower educational attainment levels and the impact of significant events and changes in daily routines on mental well-being.
+
+
+
+
+
