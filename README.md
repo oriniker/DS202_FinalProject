@@ -19,9 +19,9 @@ This data set can asses the social and economic impacts that Covid-19 had on peo
 
 ## Data Structure
 
-the link for our data set is <https://data.cdc.gov/api/views/8pt5-q6wp/rows.csv?accessType=DOWNLOAD> . We obtained this data set from data.gov, it is a data set from the the U.S. Department of Health & Human Services which they obtained through an internet questionnaire.This data covers from April of 2020 to march or 2024 so we will be able to see the affects of the lock down as well as the change produced after the knockdown was disbanded.We are not include confidence interval(because we already have the seperate high and low), the quartile range(this column is missing many values), and time period label(because we have specific start and end dates.)
+the link for our data set is <https://data.cdc.gov/api/views/8pt5-q6wp/rows.csv?accessType=DOWNLOAD> . We obtained this data set from data.gov, it is a data set from the the U.S. Department of Health & Human Services which they obtained through an internet questionnaire.This data covers from April of 2020 to march or 2024 so we will be able to see the effects of the lock down as well as the change produced after the knockdown was disbanded.We are not include confidence interval(because we already have the separate high and low), the quartile range(this column is missing many values), and time period label(because we have specific start and end dates.)
 
-**pick variables to exclude that won't be helpful**
+
 
 ## cleaning data
 
